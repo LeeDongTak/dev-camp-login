@@ -12,10 +12,14 @@ import { cn } from "@/lib/utils";
 import { SignInValueType } from "@/types/type";
 import { signInSchema } from "@/validation/sign-in";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { auth } from "../../../../firebase";
+import { useToast } from "@/components/ui/use-toast";
 
 const SignIn = () => {
+  const { toast } = useToast();
   const form = useForm<SignInValueType>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
@@ -24,7 +28,28 @@ const SignIn = () => {
     },
   });
 
-  const onSubmit = () => {};
+  const onSubmit = async (data: SignInValueType) => {
+    try {
+      const res = await signInWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+      localStorage.setItem("userToken", JSON.stringify(res.user));
+      toast({
+        title: "로그인이 완료되었습니다. ",
+        variant: "success",
+        duration: 2000,
+      });
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "아이디나 비밀번호가 맞지 않습니다 다시 입력해 주세요.",
+        variant: "destructive",
+        duration: 2000,
+      });
+    }
+  };
 
   return (
     <Card

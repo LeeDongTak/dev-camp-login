@@ -35,6 +35,7 @@ const SignUp = () => {
       toast({
         title: "비밀번호가 맞지 않습니다. ",
         variant: "destructive",
+        duration: 2000,
       });
     } else {
       const newUser = {
