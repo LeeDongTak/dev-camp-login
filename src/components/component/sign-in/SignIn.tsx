@@ -17,9 +17,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { auth } from "../../../../firebase";
 import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/router";
 
 const SignIn = () => {
   const { toast } = useToast();
+  const { push } = useRouter();
   const form = useForm<SignInValueType>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
@@ -41,6 +43,7 @@ const SignIn = () => {
         variant: "success",
         duration: 2000,
       });
+      push("/");
     } catch (error) {
       console.error(error);
       toast({
@@ -54,7 +57,7 @@ const SignIn = () => {
   return (
     <Card
       className={cn(
-        " fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[500px]"
+        "fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[500px]"
       )}
     >
       <CardHeader>
