@@ -11,3 +11,10 @@ export interface SignUpFormType {
   form: UseFormReturn<SignUpValueType, any, undefined>;
   setIsPage: Dispatch<SetStateAction<boolean>>;
 }
+
+export interface userType {
+  email: string;
+  name: string;
+  phone: string;
+  role: string;
+}
