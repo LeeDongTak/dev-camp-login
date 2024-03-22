@@ -1,7 +1,5 @@
 import {
-  Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -10,18 +8,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import React from "react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
-import { FormType } from "@/types/type";
+import { SignUpFormType } from "@/types/type";
 import { cn } from "@/lib/utils";
 
-const LastPage = ({ form, setIsPage }: FormType) => {
+const LastPage = ({ form, setIsPage }: SignUpFormType) => {
   return (
     <>
       <FormField
